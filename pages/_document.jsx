@@ -1,9 +1,9 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import css from 'styled-jsx/css';
+import styled from 'styled-jsx/css';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 
 
-const globalStyles = css.global`
+const globalStyles = styled.global`
   a,
   a:focus {
     font-weight: 400;
@@ -44,17 +44,11 @@ class customDocument extends Document {
 
 
     ctx.renderPage = () => originalRenderPage({
-      // useful for wrapping the whole react tree
       enhanceApp: (App) => (props) => styleSheets.collect(<App {...props} />),
-      // useful for wrapping in a per-page basis
       enhanceComponent: (Component) => Component,
     });
 
-    // Run the parent `getInitialProps`, it now includes the custom `renderPage`
     const initialProps = await Document.getInitialProps(ctx);
-
-    console.log(initialProps);
-    console.log(styleSheets);
     return {
       ...initialProps,
       styles: (

@@ -1,8 +1,10 @@
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useEffect } from 'react';
+import App from 'next/app';
 import Header from '../component/header';
 import { theme } from '../lib/theme';
+
 
 function customApp(props) {
   const { Component, pageProps } = props;
@@ -20,5 +22,11 @@ function customApp(props) {
     </ThemeProvider>
   );
 }
+
+/* customApp.getInitialProps = async (appContext) => {
+  // calls page's `getInitialProps` and fills `appProps.pageProps`
+  const appProps = await App.getInitialProps(appContext);
+  return { ...appProps };
+}; */
 
 export default customApp;
